@@ -1,6 +1,6 @@
 {
   "name": "owlflow-jira-events",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "jira-events-handler",
   "main": "handler.js",
   "scripts": {
