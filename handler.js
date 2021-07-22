@@ -41,6 +41,8 @@ exports.jiraSoftwareCloudV3Handler = async (event, context, callback) => {
               json: true
             })
 
+            delete data['fields']['comment']['comments']
+
             actionsRes['is_issue_exists'] = true
             actionsRes['issue'] = data
           } catch (e) {
@@ -86,6 +88,8 @@ exports.jiraSoftwareCloudV3Handler = async (event, context, callback) => {
 
     const flattenDataRes = {}
     Utils.flattenObject(actionsRes, flattenDataRes, nodeData.id)
+
+    console.log(Object.assign(event.detail.flattenData, flattenDataRes))
 
     await Utils.asyncForEach((nodeData.childrenIds || []), async (childrenId) => {
       const childrenNode = await FlowNodeContext.byNodeId(event.detail.flowId, childrenId) // nodes[childrenId]
